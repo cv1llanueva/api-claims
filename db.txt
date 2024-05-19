@@ -1,0 +1,22 @@
+DROP DATABASE IF EXISTS bd_api_claims;
+CREATE DATABASE bd_api_claims CHARSET utf8mb4;
+USE bd_api_claims;
+
+CREATE TABLE Policy (
+    policyNumber VARCHAR(50) PRIMARY KEY,
+    policyType VARCHAR(50) NOT NULL,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    premiumAmount FLOAT NOT NULL
+);
+
+CREATE TABLE Claim (
+    claimNumber VARCHAR(50) PRIMARY KEY,
+    policyNumber VARCHAR(50) NOT NULL,
+    accidentDate DATE NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    lossAmount FLOAT NOT NULL,
+    isFiledByCustomer BOOLEAN NOT NULL,
+    claimDate DATETIME NOT NULL,
+    FOREIGN KEY (policyNumber) REFERENCES Policy(policyNumber)
+);
